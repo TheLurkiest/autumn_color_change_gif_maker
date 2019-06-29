@@ -21,36 +21,6 @@ from scipy.misc import imsave
 
 # ===========================================
 
-# image .png and .gif sources:
-# https://sprites.pokecheck.org/i/002.gif
-# https://img.pokemondb.net/sprites/x-y/normal/ivysaur.png
-
-#>>> a1 = io.imread('002.gif')
-#>>> a1.shape
-#(111, 51, 58, 3)
-
-#>>> plt.imshow(a1)
-#Traceback (most recent call last):
-# ....................
-#  File "/home/rustyb69/.local/lib/python3.6/site-packages/matplotlib/image.py", line 653, in set_data
-#    raise TypeError("Invalid dimensions for image data")
-#TypeError: Invalid dimensions for image data
-
-#>>> a1 = io.imread('ivysaur.png')
-#>>> a1.shape
-#(120, 120, 4)
-#>>>
-
-
-# =============================================================================
-#for .png file, here is how you make changes:
-# -----------------------------------------
-
-#>>> a1 = io.imread('ivysaur.png')
-#>>> a1.shape
-#(120, 120, 4)
-#>>>
-
 a1_pokemon = 'ivysaur'
 p_reply=''
 p_reply=input('enter the name of a starting grass pokemon: ')
@@ -84,6 +54,20 @@ imsave('makeover1.png', rgb_swap_pic)
 
 import os
 import imageio
+
+
+
+def fin_gif_out(a1_pokemon_in, png_dir_in, file_name_list_in, images_in, gif_name_out):
+    for file_name in file_name_list_in:
+        if file_name.endswith('_makeover_' +str(a1_pokemon_in)+'.png'):
+            file_path = os.path.join(png_dir_in, file_name)
+            images_in.append(imageio.imread(file_path))
+    imageio.mimsave('./' + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(gif_name_out) + '2.gif',images_in,fps=25)
+    #imageio.mimsave('./' + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
+    #print('our new file is named using ' + str(file_name_list_in[0][:16]) + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(file_name_list_in[0][:16]) + '2.gif')
+    return images_in
+
+
 os.system('mkdir '+str(a1_pokemon) + '_gif_frames')
 
 png_dir = './' + str(a1_pokemon) + '_gif_frames/'
@@ -94,13 +78,6 @@ images = []
 
 color_change_rate=10
 alpha1 = 'abcdefghijklmnopqrstuvwxyzZ'
-
-#l1=[]
-#s1=alpha1
-#r1=range(len(s1))
-#for elem_r in r1:
-#    l1.append(s1[elem_r])
-#l2=l1
 
 list_png=list(range(0,250,color_change_rate))
 for frame_elem in list_png:
@@ -122,8 +99,6 @@ current_frame=0
 num1=[]
 file_name_list=[]
 
-# 'frame_' + str(alpha1[int(frame_elem/color_change_rate)]    )
-
 for file_name in os.listdir(png_dir):
     frame_num_start = int(file_name.find('frame_' + str(alpha1[int(frame_elem/color_change_rate)]) ) +len('frame_' + str(alpha1[int(frame_elem/color_change_rate)]) ))
     frame_num_end = int(file_name.find('_makeover'))
@@ -132,18 +107,6 @@ for file_name in os.listdir(png_dir):
         frame_num_end = int(file_name.find('_makeover'))
         file_name_list.append(file_name)
         #print('current frame is ' + str( int( file_name[frame_num_start:frame_num_end]) ) )
-
-
-def fin_gif_out(a1_pokemon_in, png_dir_in, file_name_list_in, images_in, gif_name_out):
-    for file_name in file_name_list_in:
-        if file_name.endswith('_makeover_' +str(a1_pokemon_in)+'.png'):
-            file_path = os.path.join(png_dir_in, file_name)
-            images_in.append(imageio.imread(file_path))
-    imageio.mimsave('./' + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(gif_name_out) + '2.gif',images_in,fps=25)
-    #imageio.mimsave('./' + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
-    #print('our new file is named using ' + str(file_name_list_in[0][:16]) + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(file_name_list_in[0][:16]) + '2.gif')
-    return images_in
-
 
 print('\n\n-------------------------------------\n')
 
@@ -156,7 +119,6 @@ images = fin_gif_out(a1_pokemon, png_dir, file_name_list, images, 'list_norm')
 print('\n\n-------------------------------------\n')
 print('\n\n-----------------------------------------------------------\n')
 
-
 file_name_list2 = file_name_list
 images2=[]
 png_dir2=png_dir
@@ -164,24 +126,37 @@ png_dir2=png_dir
 print('\n\n-----------------------------------------------------------\n')
 print('\n\n-------------------------------------\n')
 
-
 file_name_list2.reverse()
 print('reverse file name list is: ' + str(file_name_list2))
-
 print('\n\n-------------------------------------\n')
-
 print('...and now the reverse list is plugged into our function: ')
 images2 = fin_gif_out(a1_pokemon, png_dir2, file_name_list2, images2, 'flipped_list')
 
-
+# then we add both those lists together
 images = fin_gif_out(a1_pokemon, png_dir2, file_name_list2, images, 'list_combo')
 
 
 
+print('\n\n-----------------------------------------------------------\n')
+print('\n\n-----------------------------------------------------------\n')
+print('\n\n-----------------------------------------------------------\n')
 
 
 
 
 
+p_reply=input('enter "y" if you wish to alter an existing .gif now:')
+if(p_reply=='y'):
+    a1_pokemon_id=''
+    p_reply=''
+    p_reply=input('enter pokemon id as three digit number using zero characters preceding in order to fill your answer in to three digits if needed.')
+    a1_pokemon_id=str(p_reply)
+    a1 = io.imread(str(a1_pokemon_id)+'.gif')
 
-# then we add both those lists together
+#s>>> a1_pokemon_id='002'
+#s>>> a1 = io.imread(str(a1_pokemon_id)+'.gif')
+#>>> a1.shape
+#(111, 51, 58, 3)
+#>>> a1_frame = a1[:,:,0,:]
+#>>> a1_frame.shape
+#(111, 51, 3)

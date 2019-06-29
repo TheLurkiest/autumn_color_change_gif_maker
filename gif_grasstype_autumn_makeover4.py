@@ -21,6 +21,15 @@ from scipy.misc import imsave
 
 # ===========================================
 
+
+import os
+import imageio
+
+os.system('rm -r poke_id_gif_frames')
+os.system('rm -r *saur_gif_frames/')
+os.system('rm -r poke_id*')
+
+
 a1_poke_p = 'ivysaur'
 p_reply=''
 p_reply=input('enter the name of a starting grass pokemon: ')
@@ -52,9 +61,6 @@ imsave('makeover1.png', rgb_swap_pic)
 
 # now to turn created png into combined gif:
 
-import os
-import imageio
-
 
 def fin_gif_out(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in, gif_name_out):
     for file_name in file_name_list_in:
@@ -68,6 +74,26 @@ def fin_gif_out(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in, gif_
     return images_in
 
 # gif_from_png_autumn
+
+
+
+def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in, gif_name_out):
+    for count_file_elem, file_name in enumerate(file_name_list_in):
+        if file_name.endswith('.png'):
+            if(count_file_elem % 2 == 0):
+                file_path = os.path.join(png_dir_in, file_name)
+                images_in.append(imageio.imread(file_path))
+    print('\n\nHere is imageio.mimsave: '+str('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif'))
+    imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif',images_in,fps=25)
+    #imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
+    #print('our new file is named using ' + str(file_name_list_in[0][:16]) + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif')
+    return images_in
+
+# gif_from_png_autumn
+
+
+
+
 def gif_from_png_autumn(a1_within_pokemon):
 
     os.system('mkdir '+str(a1_within_pokemon) + '_gif_frames')
@@ -193,8 +219,11 @@ for frame_elem in r1:
 
 # autumn_ivy_107_makeover_002.png
 
+images_anim2=images_anim
+images_anim2 = fin_gif_out_even('poke_id', str('./' + str('poke_id') + '_gif_frames' + '/'), frame_file_list, images_anim, 're_combo_anim')
+
 #images = fin_gif_out(a1_frame_test, png_dir2, file_name_list2, images, 'list_combo')
-images_anim = fin_gif_out('poke_id', str('./' + str('poke_id') + '_gif_frames' + '/'), frame_file_list, images_anim, 're_combo_anim')
+images_anim = fin_gif_out('poke_id', str('./' + str('poke_id') + '_gif_frames' + '/'), frame_file_list, images_anim, 're_combo_anim2')
 #images = fin_gif_out(a1_within_pokemon, png_dir, file_name_list, images, 'list_norm')
 
 # a1_poke_id
@@ -224,12 +253,28 @@ print('frame_file_list is '+str(frame_file_list))
 
 
 def fin_gif_out_combo(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in, gif_name_out):
-    for file_name in file_name_list_in:
+    for count_file_elem, file_name in enumerate(file_name_list_in):
+        file_name = ('autumn_ivy_0_makeover_00' + str(count_file_elem))
+        png_dir_in = './poke_id_gif_frames/'
         if file_name.endswith('.png'):
+            #l1[29][ (l1[29].find('_ivy_') + len('_ivy_')): l1[29].find('_makeover')]
+            s1=''
+            s1 = file_name[( file_name.find('frame_') + len('frame_') ): file_name.find('.png') ]
+            print('s1 is: ' + str(s1))
+
+            #autumn_ivy_0_makeover_002.png
+            #if(int(s1) % 2 == 0):
+            #    print('file_name '+str(file_name)+ 'should be even...')
+            #if( int(): file_name.find('_makeover') ] ) % 2 == 0 ):
+            #if( int( [ (file_name.find('_ivy_') + len('_ivy_')): file_name.find('_makeover') ] ) % 2 == 0 ):
+
+
+
             file_path = os.path.join(png_dir_in, file_name)
             images_in.append(imageio.imread(file_path))
-    print('\n\nHere is imageio.mimsave: '+str('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif'))
+            #/home/rustyb69/Desktop/example_pokemon_numpy_image_alteration/venusaur_fall_foliage/poke_id002_altered_gif/002id_frame_0.png
     imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif',images_in,fps=55)
+    return images_in
 
 # this sort of thing will set things up so that only the even numbered items will get output if we incorporate this sort of thing into fin_gif_out_combo:
 #>>> l2=[]
@@ -238,6 +283,7 @@ def fin_gif_out_combo(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in
 #...             l2.append(elem_l)
 #...
 
+# 'autumn_ivy_'+str(frame_elem)+'_makeover_'+str(a1_poke_id)+'.png'
 
 
     #imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
@@ -266,8 +312,9 @@ if(p_reply=='y'):
     gif_frames_range = range(a1.shape[2])
 
     altered_gif_list=[]
-
-    png_dir_gif = str('./' + str('poke_id') + str(a1_poke_id) + '_altered_gif/')
+    # /home/rustyb69/Desktop/example_pokemon_numpy_image_alteration/venusaur_fall_foliage/
+    # poke_id002_altered_gif/002id_frame_0.png
+    png_dir_gif = str('./poke_id002_altered_gif/')
     os.system('mkdir ' + str('poke_id') + str(a1_poke_id) + '_altered_gif')
 
     images_gif2=[]
@@ -304,10 +351,10 @@ if(p_reply=='y'):
     # def fin_gif_out(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in, gif_name_out):
     # images = fin_gif_out(a1_within_pokemon, png_dir, file_name_list, images, 'list_norm')
 
-    images_gif2 = fin_gif_out_combo('poke_id', png_dir_gif, altered_gif_list, images_gif2, a2_out_png)
+    images_gif2 = fin_gif_out_combo('poke_id', png_dir_gif, altered_gif_list, images_gif2, 'out_back_to_gif')
 
-
-
+# '/home/rustyb69/Desktop/example_pokemon_numpy_image_alteration/venusaur_fall_foliage/poke_id002_altered_gif/002id_frame_0.png'
+print('images_gif2 is: '+str(images_gif2))
 
 
 

@@ -39,7 +39,7 @@ from scipy.misc import imsave
 #>>> a1 = io.imread('ivysaur.png')
 #>>> a1.shape
 #(120, 120, 4)
-#>>> 
+#>>>
 
 
 # =============================================================================
@@ -49,8 +49,12 @@ from scipy.misc import imsave
 #>>> a1 = io.imread('ivysaur.png')
 #>>> a1.shape
 #(120, 120, 4)
-#>>> 
+#>>>
+
 a1_pokemon = 'ivysaur'
+p_reply=''
+p_reply=input('enter the name of a starting grass pokemon: ')
+a1_pokemon = p_reply
 a1 = io.imread(str(a1_pokemon)+'.png')
 
 color_prop_buffer_b = 9
@@ -63,7 +67,7 @@ color_c = 2
 
 boo_thresh_high_b = a1[:,:,color_highlighted] > a1[:,:,color_b] + color_prop_buffer_b
 boo_thresh_high_c = a1[:,:,color_highlighted] > a1[:,:,color_c] + color_prop_buffer_c
-    
+
 booling2=boo_thresh_high_b & boo_thresh_high_c
 
 rgb_swap_pic = a1
@@ -71,11 +75,8 @@ rgb_swap_pic[:,:,color_highlighted][booling2] = 0
 
 plt.imshow(rgb_swap_pic)
 plt.show()
-
 # this creates ONE image:
 imsave('makeover1.png', rgb_swap_pic)
-plt.imshow(rgb_swap_pic)
-plt.show()
 
 # ===================================================================
 
@@ -103,12 +104,3 @@ for file_name in os.listdir(png_dir):
         images.append(imageio.imread(file_path))
 
 imageio.mimsave('./' + str(a1_pokemon) + '_gif_frames/' + 'output_' + str(a1_pokemon) + '.gif', images)
-
-
-
-
-
-
-
-
-

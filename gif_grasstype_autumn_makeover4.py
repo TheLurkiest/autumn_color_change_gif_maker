@@ -133,19 +133,50 @@ for file_name in os.listdir(png_dir):
         file_name_list.append(file_name)
         #print('current frame is ' + str( int( file_name[frame_num_start:frame_num_end]) ) )
 
-file_name_list.sort()
 
+def fin_gif_out(a1_pokemon_in, png_dir_in, file_name_list_in, images_in, gif_name_out):
+    for file_name in file_name_list_in:
+        if file_name.endswith('_makeover_' +str(a1_pokemon_in)+'.png'):
+            file_path = os.path.join(png_dir_in, file_name)
+            images_in.append(imageio.imread(file_path))
+    imageio.mimsave('./' + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(gif_name_out) + '2.gif',images_in,fps=25)
+    #imageio.mimsave('./' + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
+    #print('our new file is named using ' + str(file_name_list_in[0][:16]) + str(a1_pokemon_in) + '_gif_frames/' + 'output_' + str(a1_pokemon_in) + str(file_name_list_in[0][:16]) + '2.gif')
+
+
+print('\n\n-------------------------------------\n')
+
+file_name_list.sort()
 print('sorted file name list is: ' + str(file_name_list))
 
-for file_name in file_name_list:
-    if file_name.endswith('_makeover_' +str(a1_pokemon)+'.png'):
-        file_path = os.path.join(png_dir, file_name)
-        images.append(imageio.imread(file_path))
+print('our new function gets called for the first time with the normal list')
+fin_gif_out(a1_pokemon, png_dir, file_name_list, images, 'list_norm')
+
+print('\n\n-------------------------------------\n')
+print('\n\n-----------------------------------------------------------\n')
+
+
+file_name_list2 = file_name_list
+images2=[]
+png_dir2=png_dir
+
+print('\n\n-----------------------------------------------------------\n')
+print('\n\n-------------------------------------\n')
+
+
+file_name_list2.reverse()
+print('reverse file name list is: ' + str(file_name_list2))
+
+print('\n\n-------------------------------------\n')
+
+print('...and now the reverse list is plugged into our function: ')
+fin_gif_out(a1_pokemon, png_dir2, file_name_list2, images2, 'flipped_list')
 
 
 
-imageio.mimsave('./' + str(a1_pokemon) + '_gif_frames/' + 'output_' + str(a1_pokemon) + '.gif', images)
 
-imageio.mimsave('./' + str(a1_pokemon) + '_gif_frames/' + 'output_' + str(a1_pokemon) + '2.gif',images,fps=25)
 
-imageio.mimsave('./' + str(a1_pokemon) + '_gif_frames/' + 'output_' + str(a1_pokemon) + '3.gif',images,fps=55)
+
+
+
+# then we add both those lists together

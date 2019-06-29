@@ -94,8 +94,13 @@ images = []
 
 color_change_rate=10
 alpha1 = 'abcdefghijklmnopqrstuvwxyzZ'
-print('alpha1 index 0 is ' + str(alpha1[0]))
-print('alpha1 index 1 is ' + alpha1[1])
+
+#l1=[]
+#s1=alpha1
+#r1=range(len(s1))
+#for elem_r in r1:
+#    l1.append(s1[elem_r])
+#l2=l1
 
 list_png=list(range(0,250,color_change_rate))
 for frame_elem in list_png:

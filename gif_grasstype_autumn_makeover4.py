@@ -91,16 +91,56 @@ images = []
 
 # now to make a gif from those .png files, it's as simple as this--
 # this creates a series of 25 images of slow color change you can use to make a gif:
-list_png=list(range(0,250,10))
+
+color_change_rate=10
+alpha1 = 'abcdefghijklmnopqrstuvwxyzZ'
+print('alpha1 index 0 is ' + str(alpha1[0]))
+print('alpha1 index 1 is ' + alpha1[1])
+
+list_png=list(range(0,250,color_change_rate))
 for frame_elem in list_png:
     rgb_swap_pic[:,:,color_highlighted][booling2] = frame_elem
-    imsave(str(png_dir) + 'gif_frame_' + str(frame_elem)+ '_makeover_' +str(a1_pokemon)+'.png', rgb_swap_pic)
+    if(frame_elem == 0):
+        print('this is the current frame: ' + str(int(frame_elem)))
+        print(str(png_dir) + 'gif_frame_' + str(alpha1[int(frame_elem)]) + str(frame_elem) + '_makeover_' + str(a1_pokemon) + '.png')
+        imsave(str(png_dir) + 'gif_frame_' + str(alpha1[int(frame_elem)]) + str(frame_elem) + '_makeover_' + str(a1_pokemon) + '.png', rgb_swap_pic)
+    else:
+        print('this is the current frame: '+str(int(frame_elem/color_change_rate)))
+        print(str(png_dir) + 'gif_frame_' + str(alpha1[int(frame_elem/color_change_rate)]) + str(frame_elem) + '_makeover_' + str(a1_pokemon)+'.png')
+        imsave(str(png_dir) + 'gif_frame_' + str(alpha1[int(frame_elem/color_change_rate)]) + str(frame_elem) + '_makeover_' + str(a1_pokemon)+'.png', rgb_swap_pic)
 
 # check if ends in: '_makeover_' +str(a1_pokemon)+'.png' --below
+frame_num_start=0
+frame_num_end=0
+current_frame=0
+
+num1=[]
+file_name_list=[]
+
+# 'frame_' + str(alpha1[int(frame_elem/color_change_rate)]    )
 
 for file_name in os.listdir(png_dir):
+    frame_num_start = int(file_name.find('frame_' + str(alpha1[int(frame_elem/color_change_rate)]) ) +len('frame_' + str(alpha1[int(frame_elem/color_change_rate)]) ))
+    frame_num_end = int(file_name.find('_makeover'))
+    if file_name.endswith('_makeover_' +str(a1_pokemon)+'.png'):
+        frame_num_start=int(file_name.find('frame_' + str(alpha1[int(frame_elem/color_change_rate)]) ) +len('frame_' + str(alpha1[int(frame_elem/color_change_rate)]) ))
+        frame_num_end = int(file_name.find('_makeover'))
+        file_name_list.append(file_name)
+        #print('current frame is ' + str( int( file_name[frame_num_start:frame_num_end]) ) )
+
+file_name_list.sort()
+
+print('sorted file name list is: ' + str(file_name_list))
+
+for file_name in file_name_list:
     if file_name.endswith('_makeover_' +str(a1_pokemon)+'.png'):
         file_path = os.path.join(png_dir, file_name)
         images.append(imageio.imread(file_path))
 
+
+
 imageio.mimsave('./' + str(a1_pokemon) + '_gif_frames/' + 'output_' + str(a1_pokemon) + '.gif', images)
+
+imageio.mimsave('./' + str(a1_pokemon) + '_gif_frames/' + 'output_' + str(a1_pokemon) + '2.gif',images,fps=25)
+
+imageio.mimsave('./' + str(a1_pokemon) + '_gif_frames/' + 'output_' + str(a1_pokemon) + '3.gif',images,fps=55)

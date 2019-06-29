@@ -82,7 +82,9 @@ r1=range(len(a1[:,:,:,0]))
 
 frame_file_list=[]
 
-os.system('mkdir ' + str('poke_id') + '_gif_frames')
+poke_id = a1_poke_id
+
+os.system('mkdir ' + (str('poke_id') + str(poke_id)) + '_gif_frames')
 
 
 
@@ -101,12 +103,12 @@ for frame_elem in r1:
     b2[:,:,0][booling2] = (b2[:,:,0][booling2] + 100)
     new_file_name='autumn_ivy_'+str(frame_elem)+'_makeover_'+str(a1_poke_id)+'.png'
     # new_file_name = str('autumn_ivy_' + str(frame_elem) + '_makeover_' + str(a1_poke_id) + '.png')
-    plt.imsave( str('./' + str('poke_id') + '_gif_frames' + '/' + new_file_name), b2)
+    plt.imsave( str('./' + (str('poke_id') + str(poke_id)) + '_gif_frames' + '/' + new_file_name), b2)
     frame_file_list.append(new_file_name)
 
 
 images_anim2=images_anim
-images_anim2 = fin_gif_out_even('poke_id', str('./' + str('poke_id') + '_gif_frames' + '/'), frame_file_list, images_anim, 're_combo_anim')
+images_anim2 = fin_gif_out_even((str('poke_id') + str(poke_id)), str('./' + (str('poke_id') + str(poke_id)) + '_gif_frames' + '/'), frame_file_list, images_anim, 're_combo_anim')
 
 
 

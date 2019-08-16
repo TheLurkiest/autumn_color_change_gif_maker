@@ -76,33 +76,62 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
 
 # ========================================================================
 
-p_list_all = ['Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gloom', 'Vileplume', 'Paras', 'Parasect', 'Bellsprout', 'Weepinbell', 'Victreebel', 'Exeggcute', 'Exeggutor', 'Tangela', 'Chikorita', 'Bayleef', 'Meganium', 'Bellossom', 'Hoppip', 'Skiploom', 'Jumpluff', 'Sunkern', 'Sunflora', 'Celebi', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume', 'back/Paras', 'back/Parasect', 'back/Bellsprout', 'back/Weepinbell', 'back/Victreebel', 'back/Exeggcute', 'back/Exeggutor', 'back/Tangela', 'back/Chikorita', 'back/Bayleef', 'back/Meganium', 'back/Bellossom', 'back/Hoppip', 'back/Skiploom', 'back/Jumpluff', 'back/Sunkern', 'back/Sunflora', 'back/Celebi']
+p_list_all_grass = ['Leafeon', 'Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gloom', 'Vileplume', 'Paras', 'Parasect', 'Bellsprout', 'Weepinbell', 'Victreebel', 'Exeggcute', 'Exeggutor', 'Tangela', 'Chikorita', 'Bayleef', 'Meganium', 'Bellossom', 'Hoppip', 'Skiploom', 'Jumpluff', 'Sunkern', 'Sunflora', 'Celebi', 'back/Leafeon', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume', 'back/Paras', 'back/Parasect', 'back/Bellsprout', 'back/Weepinbell', 'back/Victreebel', 'back/Exeggcute', 'back/Exeggutor', 'back/Tangela', 'back/Chikorita', 'back/Bayleef', 'back/Meganium', 'back/Bellossom', 'back/Hoppip', 'back/Skiploom', 'back/Jumpluff', 'back/Sunkern', 'back/Sunflora', 'back/Celebi']
 
-# p_list_all = ['Sunflora', 'Celebi', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume', 'back/Paras', 'back/Parasect', 'back/Bellsprout', 'back/Weepinbell', 'back/Victreebel', 'back/Exeggcute', 'back/Exeggutor', 'back/Tangela', 'back/Chikorita', 'back/Bayleef', 'back/Meganium', 'back/Bellossom', 'back/Hoppip', 'back/Skiploom', 'back/Jumpluff', 'back/Sunkern', 'back/Sunflora', 'back/Celebi']
+e_type_list = ['mareep', 'zapdos', 'emolga', 'joltik', 'back/mareep', 'back/zapdos', 'back/emolga', 'back/joltik']
 
+# grass:
+r_mutation_vector_grass = (2/3)
+r2_mutation_vector_grass = (1/2)
+g_mutation_vector_grass = (1/4)
+b_mutation_vector_grass = (1/4)
+
+# electric:
+r_gamma_e_type = -(3/4)
+r2_gamma_e_type = -(1/2)
+g_gamma_e_type = (95/100)
+b_gamma_e_type = (7/8)
 
 # best source of gifs currently-- is NOW THIS INSTEAD:
 # http://www.pokestadium.com/sprites/xy/cubone.gif
-
 p_list_to_change=[]
-
-# ...therefore default value is now name-- not number:
 a1_poke_id = 'venonat'
 p_reply = a1_poke_id
 a1_poke_id = str(p_reply)
+p_type_choice = "G"
 
+a1_poke_id = input('enter pokemon name or enter a type to create new mutations of for many different individuals of a given type at once-- for now "GRASS" and "ELECTRIC" --enter "G" or "E" to select one of these types-- for now these are the only types that allow for multiple individuals to be altered at once: ')
+p_type_choice = a1_poke_id
+if(a1_poke_id == 'G'):
+    p_list_to_change = p_list_all_grass
 
+    r_factor = r_mutation_vector_grass
+    r2_factor = r2_mutation_vector_grass
+    g_factor = g_mutation_vector_grass
+    b_factor = b_mutation_vector_grass
 
-a1_poke_id = input('enter pokemon name or enter "ALL" to add all pokemon of a given type listed: ')
-if(a1_poke_id == 'ALL'):
-    p_list_to_change = p_list_all
+    r_grass_buffer = -35
+    b_grass_buffer = -45
+    r_buff = r_grass_buffer
+    b_buff = b_grass_buffer
+
+elif(a1_poke_id == 'E'):
+    p_list_to_change = e_type_list
+
+    r_factor = r_gamma_e_type
+    r2_factor = r2_gamma_e_type
+    g_factor = g_gamma_e_type
+    b_factor = b_gamma_e_type
+
+    r_e_type_buffer = 14
+    b_e_type_buffer = -29
+    r_buff = r_e_type_buffer
+    b_buff = b_e_type_buffer
+
 else:
     p_list_to_change.append(a1_poke_id)
 
 import requests
-
-
-
 
 # ==========================================================================
 # ==========================================================================
@@ -120,7 +149,7 @@ for p_mon_elem in p_list_to_change:
     image_url = 'http://www.pokestadium.com/sprites/xy/'+str(a1_poke_id)+'.gif'
     s2 = poke_id
     if (s2.count('/') == 1):
-        a1_poke_id = str(a1_poke_id[( a1_poke_id.find('/') + 1 ):])
+        a1_poke_id = str(a1_poke_id[( a1_poke_id.find('/') + 1 ):]) + 'Back'
         p_reply = a1_poke_id
         poke_id = str(p_reply)
 #>>> if (s2.count('/') == 1):
@@ -165,22 +194,41 @@ for p_mon_elem in p_list_to_change:
         a2=b2
         a3 = a2
 
-        a2 = b2[:,:,0] < b2[:,:,1] - 35
-        a2_smooth = b2
-        a2_smooth=b2[:,:,2] < b2[:,:,1] - 45
-        booling2 = a2 & a2_smooth
-        b2[:,:,0][booling2] = b2[:,:,0][booling2] + (( 255 - b2[:,:,0][booling2] ) * (2/3))
+
+        if(p_type_choice == 'E'):
+            # r is 30 higher than g and >100 higher than b
+
+            a2 = b2[:,:,0] > b2[:,:,1] + 29
+            a2_smooth = b2
+            a2_smooth = b2[:,:,0] > b2[:,:,2] + 99
+            booling2 = a2 & a2_smooth
+
+            b2[:,:,0][booling2] = ( b2[:,:,0][booling2] + ( (b2[:,:,0][booling2]) ) * (r_gamma_e_type) )
+
+            #b2[:,:,1][booling2] = ( b2[:,:,1][booling2] + ( 255 - (b2[:,:,1][booling2]) ) * (g_gamma_e_type) )
+            b2[:,:,1][booling2] = ( b2[:,:,1][booling2] + ( 255 - (b2[:,:,1][booling2]) ) * (g_gamma_e_type) )
+
+            b2[:,:,2][booling2] = ( b2[:,:,2][booling2] + ( 255 - (b2[:,:,2][booling2]) ) * (b_gamma_e_type) )
+
+        else:
+            a2 = b2[:,:,0] < b2[:,:,1] + r_buff
+            a2_smooth = b2
+            a2_smooth = b2[:,:,2] < b2[:,:,1] + b_buff
+            booling2 = a2 & a2_smooth
+
+            b2[:,:,0][booling2] = b2[:,:,0][booling2] + (( 255 - b2[:,:,0][booling2] ) * (r_factor))
+
+            a3 = b2[:,:,0] < b2[:,:,1] - 11
+            a3_smooth = b2
+            a3_smooth=b2[:,:,2] < b2[:,:,1] - 11
+            booling3 = a3 & a3_smooth
+            b2[:,:,0][booling3] = b2[:,:,0][booling3] + ( (255 - b2[:,:,0][booling3]) * (r2_factor) )
+
+            b2[:,:,2][booling2] = ((b2[:,:,2][booling2]) * (b_factor))
+            #b2[:,:,1][booling2] = (b2[:,:,1][booling2])/2
+            b2[:,:,1][booling2] = b2[:,:,1][booling2] - ((b2[:,:,1][booling2]) * (g_factor))
 
 
-        a3 = b2[:,:,0] < b2[:,:,1] - 11
-        a3_smooth = b2
-        a3_smooth=b2[:,:,2] < b2[:,:,1] - 11
-        booling3 = a3 & a3_smooth
-        b2[:,:,0][booling3] = b2[:,:,0][booling3] + ( (255 - b2[:,:,0][booling3]) * (1/2) )
-
-        b2[:,:,2][booling2] = (b2[:,:,2][booling2])/4
-        #b2[:,:,1][booling2] = (b2[:,:,1][booling2])/2
-        b2[:,:,1][booling2] = b2[:,:,1][booling2] - (b2[:,:,1][booling2])/4
 
         b2_black_bg_bool = (b2[:,:,0] > 209) & (b2[:,:,2] < 5)
 
@@ -218,7 +266,9 @@ for p_mon_elem in p_list_to_change:
 
 
 
-os.system('gifsicle -bII --transparent "#000000" *type3.gif')
+# --YOU MAY NEED TO ENTER THIS LAND THING BY HAND VIA THE TERMINAL-- IT WORKS
+# WHEN EXECUTED AS A TERMINAL COMMAND (TO RE-CREATE TRANSPARENT BACKGROUND)
+os.system('gifsicle -bII --transparent "#000000" completed_color_change_animations/*type3.gif')
 
 
 

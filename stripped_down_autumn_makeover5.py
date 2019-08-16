@@ -1,5 +1,13 @@
 # autumn venusaur makeover:
 
+# HOW TO USE:
+# just enter this terminal command to use this python code:
+#  python stripped_down_autumn_makeover5.py
+# --for us, 'python' just defaults to python3.6 rather than 3.7
+# ...which is what we want here-- also, don't use the usual virtual
+# environment here either-- it won't work.
+
+
 import numpy as np
 from skimage import io
 import imageio
@@ -30,8 +38,8 @@ os.system('rm -r *saur_gif_frames/')
 os.system('rm -r poke_id*')
 
 # ===================================================================
-
 # now to turn created png into combined gif:
+
 
 
 def fin_gif_out(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in, gif_name_out):
@@ -62,19 +70,20 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
 # gif_from_png_autumn
 
 
+
+
+
 # ========================================================================
 # source of grass types comes from here: https://sprites.pokecheck.org/i/272.gif
 
 # best source of gifs currently-- is NOW THIS INSTEAD:
 # http://www.pokestadium.com/sprites/xy/cubone.gif
 
-
 # ...therefore default value is now name-- not number:
 a1_poke_id = 'venonat'
 p_reply = a1_poke_id
 
 a1_poke_id = str(p_reply)
-
 
 a1_poke_id = input('enter pokemon name: ')
 import requests
@@ -130,3 +139,11 @@ images_anim2 = fin_gif_out_even((str('poke_id') + str(poke_id)), str('./' + (str
 # =========================================================================
 # =========================================================================
 # =========================================================================
+os.system( str('cp ' + str('./' + ('poke_id' + str(poke_id)) + '_gif_frames' + '/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')) + ' ' + './completed_color_change_animations/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')
+
+
+
+
+
+
+#

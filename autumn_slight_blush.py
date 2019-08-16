@@ -75,7 +75,8 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
     return images_in
 
 # ========================================================================
-# source of grass types comes from here: https://sprites.pokecheck.org/i/272.gif
+
+p_list1 = ['Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gloom', 'Vileplume', 'Paras', 'Parasect', 'Bellsprout', 'Weepinbell', 'Victreebel', 'Exeggcute', 'Exeggutor', 'Tangela', 'Chikorita', 'Bayleef', 'Meganium', 'Bellossom', 'Hoppip', 'Skiploom', 'Jumpluff', 'Sunkern', 'Sunflora', 'Celebi', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume', 'back/Paras', 'back/Parasect', 'back/Bellsprout', 'back/Weepinbell', 'back/Victreebel', 'back/Exeggcute', 'back/Exeggutor', 'back/Tangela', 'back/Chikorita', 'back/Bayleef', 'back/Meganium', 'back/Bellossom', 'back/Hoppip', 'back/Skiploom', 'back/Jumpluff', 'back/Sunkern', 'back/Sunflora', 'back/Celebi']
 
 # best source of gifs currently-- is NOW THIS INSTEAD:
 # http://www.pokestadium.com/sprites/xy/cubone.gif
@@ -83,13 +84,14 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
 # ...therefore default value is now name-- not number:
 a1_poke_id = 'venonat'
 p_reply = a1_poke_id
-
 a1_poke_id = str(p_reply)
 
 a1_poke_id = input('enter pokemon name: ')
 import requests
 
 image_url = 'http://www.pokestadium.com/sprites/xy/'+str(a1_poke_id)+'.gif'
+
+
 
 img_data = requests.get(image_url).content
 with open(str(a1_poke_id)+'.gif', 'wb') as handler:
@@ -117,6 +119,13 @@ new_file_name=''
 images_anim = []
 
 for frame_elem in r1:
+
+
+    # Use this terminal command to change a black background to transparent:
+    ##### gifsicle -bII --transparent "#000000" anim_leafeon.gif
+    # ...or to do EVERY gif in the directory:
+    # ##### gifsicle -bII --transparent "#000000" *type3.gif
+
     a1_frame_test=a1[frame_elem,:,:,:]
     a1 = io.imread(str(a1_poke_id)+'.gif')
     b2=a1_frame_test
@@ -140,9 +149,15 @@ for frame_elem in r1:
     #b2[:,:,1][booling2] = (b2[:,:,1][booling2])/2
     b2[:,:,1][booling2] = b2[:,:,1][booling2] - (b2[:,:,1][booling2])/4
 
-    a2 = b2
+    b2_black_bg_bool = (b2[:,:,0] > 209) & (b2[:,:,2] < 5)
 
-    #booling2=a2
+    a2 = b2
+    a2_black = b2
+
+    a2_black[:,:,0][b2_black_bg_bool] = 0
+
+    a2 = a2_black
+
     #b2[:,:,0][booling2] = 255
     b2[:,:,2][booling2] = b2[:,:,2][booling2] - (b2[:,:,2][booling2] / 3)
 

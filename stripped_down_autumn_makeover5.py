@@ -1,5 +1,11 @@
 # autumn venusaur makeover:
 
+# here is our newest gif url source--first front gif:
+# http://www.pokestadium.com/sprites/xy/cubone.gif
+
+# ...then back gif:
+# http://www.pokestadium.com/sprites/xy/back/cubone.gif
+
 # HOW TO USE:
 # just enter this terminal command to use this python code:
 #  python stripped_down_autumn_makeover5.py

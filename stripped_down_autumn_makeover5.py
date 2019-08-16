@@ -65,11 +65,26 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
 # ========================================================================
 # source of grass types comes from here: https://sprites.pokecheck.org/i/272.gif
 
+# best source of gifs currently-- is NOW THIS INSTEAD:
+# http://www.pokestadium.com/sprites/xy/cubone.gif
 
-a1_poke_id = '002'
 
-p_reply=input('enter the ID number of your pokemon, using a format containing 3 digits-- so if your ID number is less than 100, you would need to include preceding zeros in the ID number you report-- for example, 003: ')
+# ...therefore default value is now name-- not number:
+a1_poke_id = 'venonat'
+p_reply = a1_poke_id
+
 a1_poke_id = str(p_reply)
+
+
+a1_poke_id = input('enter pokemon name: ')
+import requests
+
+image_url = 'http://www.pokestadium.com/sprites/xy/'+str(a1_poke_id)+'.gif'
+
+img_data = requests.get(image_url).content
+with open(str(a1_poke_id)+'.gif', 'wb') as handler:
+    handler.write(img_data)
+
 
 a1 = io.imread(str(a1_poke_id)+'.gif')
 a1_frame_test=a1[7,:,:,:]

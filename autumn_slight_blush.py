@@ -78,6 +78,9 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
 
 p_list_all = ['Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gloom', 'Vileplume', 'Paras', 'Parasect', 'Bellsprout', 'Weepinbell', 'Victreebel', 'Exeggcute', 'Exeggutor', 'Tangela', 'Chikorita', 'Bayleef', 'Meganium', 'Bellossom', 'Hoppip', 'Skiploom', 'Jumpluff', 'Sunkern', 'Sunflora', 'Celebi', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume', 'back/Paras', 'back/Parasect', 'back/Bellsprout', 'back/Weepinbell', 'back/Victreebel', 'back/Exeggcute', 'back/Exeggutor', 'back/Tangela', 'back/Chikorita', 'back/Bayleef', 'back/Meganium', 'back/Bellossom', 'back/Hoppip', 'back/Skiploom', 'back/Jumpluff', 'back/Sunkern', 'back/Sunflora', 'back/Celebi']
 
+# p_list_all = ['Sunflora', 'Celebi', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume', 'back/Paras', 'back/Parasect', 'back/Bellsprout', 'back/Weepinbell', 'back/Victreebel', 'back/Exeggcute', 'back/Exeggutor', 'back/Tangela', 'back/Chikorita', 'back/Bayleef', 'back/Meganium', 'back/Bellossom', 'back/Hoppip', 'back/Skiploom', 'back/Jumpluff', 'back/Sunkern', 'back/Sunflora', 'back/Celebi']
+
+
 # best source of gifs currently-- is NOW THIS INSTEAD:
 # http://www.pokestadium.com/sprites/xy/cubone.gif
 
@@ -99,6 +102,8 @@ else:
 import requests
 
 
+
+
 # ==========================================================================
 # ==========================================================================
 
@@ -107,11 +112,20 @@ import requests
 for p_mon_elem in p_list_to_change:
     print('STARTING NEW POKEMON ALTERATIONS NOW: ' + str(p_mon_elem))
     print('----------------------------------------------------------------\n')
-    a1_poke_id = str(p_mon_elem)
+
+    a1_poke_id = str(p_mon_elem).lower()
     p_reply = a1_poke_id
     poke_id = str(p_reply)
     # ==========================================================================
     image_url = 'http://www.pokestadium.com/sprites/xy/'+str(a1_poke_id)+'.gif'
+    s2 = poke_id
+    if (s2.count('/') == 1):
+        a1_poke_id = str(a1_poke_id[( a1_poke_id.find('/') + 1 ):])
+        p_reply = a1_poke_id
+        poke_id = str(p_reply)
+#>>> if (s2.count('/') == 1):
+#...     s1=s1[(s1.find('/') +1):]
+
 
     img_data = requests.get(image_url).content
     with open(str(a1_poke_id)+'.gif', 'wb') as handler:
@@ -196,3 +210,16 @@ for p_mon_elem in p_list_to_change:
     # =========================================================================
     # =========================================================================
     os.system( str('cp ' + str('./' + ('poke_id' + str(poke_id)) + '_gif_frames' + '/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')) + ' ' + './completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif')
+
+    os.system( str('cp ' + str('./' + ('poke_id' + str(poke_id)) + '_gif_frames' + '/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')) + ' ' + './completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif')
+
+    os.system('gifsicle --flip-horizontal ' + 'completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif' + ' -o ' + 'completed_color_change_animations/' + str(poke_id) + 'flipped_FALL_type3.gif' )
+
+
+
+
+os.system('gifsicle -bII --transparent "#000000" *type3.gif')
+
+
+
+#

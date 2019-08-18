@@ -176,8 +176,8 @@ for p_mon_elem in p_list_to_change:
 
     a1 = io.imread(str(a1_poke_id)+'.gif')
     a1_frame_test=a1[7,:,:,:]
-    #plt.imshow(a1_frame_test)
-    #plt.show()
+    plt.imshow(a1_frame_test)
+    plt.show()
 
     a1 = io.imread(str(a1_poke_id)+'.gif')
 
@@ -279,7 +279,7 @@ for p_mon_elem in p_list_to_change:
 
             max_bond_len_rg = 10
             max_bond_len_rb = 25
-            max_bond_len_gb = 19
+            max_bond_len_gb = 43
 
             max0=251
             max1=241
@@ -319,15 +319,21 @@ for p_mon_elem in p_list_to_change:
 #3# & a02_max
 ### & a12_max ##
 
-            booling2 = a01_min & a02_min & a12_min & a01_max & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1
 
+
+
+
+            booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a01_max & a12_min
+
+            #
+            #
 
             # zombie-fy w/ greener skin than before, and less of everything else:
-            proportion_c_increase = 0.8
+            proportion_c_increase = 0.5
             b2[:,:,0][booling2] = b2[:,:,0][booling2] + ( -1 * ( ( b2[:,:,0][booling2] ) - 255 ) * proportion_c_increase )
 
 
-            proportion_c_increase = -0.9
+            proportion_c_increase = -0.2
             b2[:,:,1][booling2] = b2[:,:,1][booling2] + ( -1 * (255 - ( b2[:,:,1][booling2] ) ) * proportion_c_increase )
 
 

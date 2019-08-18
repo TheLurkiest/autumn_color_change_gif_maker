@@ -270,12 +270,12 @@ for p_mon_elem in p_list_to_change:
             min_bond_len_gb = 0
 
             max_bond_len_rg = 20
-            max_bond_len_rb = 75
+            max_bond_len_rb = 25
             max_bond_len_gb = 45
 
-            max0=251
-            max1=241
-            max2=225
+            max0=253
+            max1=245
+            max2=227
 
             min0=52
             min1=52
@@ -306,15 +306,14 @@ for p_mon_elem in p_list_to_change:
             a_max1 = b2[:,:,1] < max1
             a_min1 = b2[:,:,1] > min1
 
-            #booling2 = a01_min & a01_max & a12_min & a12_max & a02_min & a02_max
-            #booling2 = a01_min & a01_max & a12_min & a12_max & a02_min & a02_max &
+# removed bools due to clashing with other ideas: a02_max & a12_max
 
-            #############         &
-#3# & a02_max
-### & a12_max ##
+            # DEFAULT BACKUP:
+            #booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a12_min & a01_max
 
-            booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a12_min & a01_max
             #booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a12_min & a12_max
+
+            booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a12_min & a01_max & (~a12_max) & (~a02_max)
 
 
 

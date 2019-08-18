@@ -321,6 +321,7 @@ for p_mon_elem in p_list_to_change:
 
 
 
+            # booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a01_max & a12_min
 
 
             booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a01_max & a12_min

@@ -180,13 +180,9 @@ for p_mon_elem in p_list_to_change:
     plt.show()
 
     a1 = io.imread(str(a1_poke_id)+'.gif')
-
     r1=range(len(a1[:,:,:,0]))
-
     frame_file_list=[]
-
     poke_id = a1_poke_id
-
     os.system('mkdir ' + (str('poke_id') + str(poke_id)) + '_gif_frames')
 
     new_file_name=''
@@ -199,7 +195,6 @@ for p_mon_elem in p_list_to_change:
         b2=a1_frame_test
         a2=b2
         a3 = a2
-
 
         if(p_type_choice == 'e'):
             # r is 30 higher than g and >100 higher than b
@@ -247,11 +242,8 @@ for p_mon_elem in p_list_to_change:
             a5_smooth = b2
             a5_smooth = b2[:,:,2] < 125
 
-
             booling2 = a2 & a2_smooth & a3_smooth & a4_smooth & a5_smooth
-
             b2[:,:,1][booling2] = b2[:,:,1][booling2] + (( 255 - b2[:,:,1][booling2] ) * (1/3))
-
             b2[:,:,0][booling2] = b2[:,:,0][booling2] - ( ( b2[:,:,0][booling2] ) * (1/5) )
 
         elif(p_type_choice == 'f'):
@@ -273,34 +265,36 @@ for p_mon_elem in p_list_to_change:
             booling2 = a2 & a2_smooth & a3_smooth & a4_smooth & a5_smooth
         else:
 
-            min_bond_len_rg = 1
-            min_bond_len_rb = 1
-            min_bond_len_gb = 1
+            min_bond_len_rg = 0
+            min_bond_len_rb = 2
+            min_bond_len_gb = 0
 
-            max_bond_len_rg = 10
-            max_bond_len_rb = 25
-            max_bond_len_gb = 43
+            max_bond_len_rg = 20
+            max_bond_len_rb = 75
+            max_bond_len_gb = 45
 
             max0=251
             max1=241
             max2=225
 
-            min0=25
-            min1=25
-            min2=25
+            min0=52
+            min1=52
+            min2=52
 
-
-
-            #_import math
-            # abs(-9) = 9
             a01_min = min_bond_len_rg < abs(b2[:,:,0] - b2[:,:,1])
-            a01_max = max_bond_len_rg > abs(b2[:,:,0] - b2[:,:,1])
-
             a12_min = min_bond_len_gb < abs(b2[:,:,2] - b2[:,:,1])
+            a02_min = min_bond_len_rb < abs(b2[:,:,2] - b2[:,:,0])
+
+
+            # $$$$ ========================================================
+            a01_max = max_bond_len_rg > abs(b2[:,:,0] - b2[:,:,1])
+            # $$$$ =============================== 20 >
+            #!!
             a12_max = max_bond_len_gb > abs(b2[:,:,2] - b2[:,:,1])
 
-            a02_min = min_bond_len_rb < abs(b2[:,:,2] - b2[:,:,0])
+
             a02_max = max_bond_len_rb > abs(b2[:,:,2] - b2[:,:,0])
+            #!!
 
 
             a_max2 = b2[:,:,2] < max2
@@ -319,24 +313,24 @@ for p_mon_elem in p_list_to_change:
 #3# & a02_max
 ### & a12_max ##
 
+            booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a12_min & a01_max
+            #booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a12_min & a12_max
 
 
-            # booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a01_max & a12_min
 
 
-            booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a01_max & a12_min
 
-            #
-            #
+            #booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a12_min & a01_max
+
+            #booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a01_max & a12_min & a02_max & a12_max
+            #booling2 = a01_min & a02_min & a_max2 & a_min2 & a_max0 & a_min0 & a_max1 & a_min1 & a01_max & a12_min
 
             # zombie-fy w/ greener skin than before, and less of everything else:
             proportion_c_increase = 0.5
             b2[:,:,0][booling2] = b2[:,:,0][booling2] + ( -1 * ( ( b2[:,:,0][booling2] ) - 255 ) * proportion_c_increase )
 
-
             proportion_c_increase = -0.2
             b2[:,:,1][booling2] = b2[:,:,1][booling2] + ( -1 * (255 - ( b2[:,:,1][booling2] ) ) * proportion_c_increase )
-
 
         # =====================================================================
         # ========== finally-- removing the background we accidentally created:
@@ -363,7 +357,6 @@ for p_mon_elem in p_list_to_change:
         new_file_name='autumn_ivy_'+str(frame_elem)+'_makeover_'+str(a1_poke_id)+'.png'
         plt.imsave( str('./' + (str('poke_id') + str(poke_id)) + '_gif_frames' + '/' + new_file_name), b2)
         frame_file_list.append(new_file_name)
-
 
     images_anim2=images_anim
     images_anim2 = fin_gif_out_even((str('poke_id') + str(poke_id)), str('./' + (str('poke_id') + str(poke_id)) + '_gif_frames' + '/'), frame_file_list, images_anim, 're_combo_anim')

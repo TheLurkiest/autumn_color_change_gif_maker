@@ -43,8 +43,8 @@ import scipy.misc
 import os
 import imageio
 
-os.system('rm -r poke_id_gif_frames')
-os.system('rm -r *saur_gif_frames/')
+os.system('rm -r poke_id_gif_fr')
+os.system('rm -r *saur_gif_fr/')
 os.system('rm -r poke_id*')
 
 # ===================================================================
@@ -57,10 +57,10 @@ def fin_gif_out(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in, gif_
         if file_name.endswith('.png'):
             file_path = os.path.join(png_dir_in, file_name)
             images_in.append(imageio.imread(file_path))
-    print('\n\nHere is imageio.mimsave: '+str('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif'))
-    imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif',images_in,fps=25)
-    #imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
-    #print('our new file is named using ' + str(file_name_list_in[0][:16]) + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif')
+    print('\n\nHere is imageio.mimsave: '+str('./' + str(a1_in_in_pokemon) + '_gif_fr/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif'))
+    imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_fr/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif',images_in,fps=25)
+    #imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_fr/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
+    #print('our new file is named using ' + str(file_name_list_in[0][:16]) + str(a1_in_in_pokemon) + '_gif_fr/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif')
     return images_in
 
 # gif_from_png_autumn
@@ -71,10 +71,10 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
             if(count_file_elem % 2 == 0):
                 file_path = os.path.join(png_dir_in, file_name)
                 images_in.append(imageio.imread(file_path))
-    print('\n\nHere is imageio.mimsave: '+str('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif'))
-    imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif',images_in,fps=35)
-    #imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
-    #print('our new file is named using ' + str(file_name_list_in[0][:16]) + str(a1_in_in_pokemon) + '_gif_frames/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif')
+    print('\n\nHere is imageio.mimsave: '+str('./' + str(a1_in_in_pokemon) + '_gif_fr/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif'))
+    imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_fr/' + 'output_' + str(a1_in_in_pokemon) + str(gif_name_out) + '2.gif',images_in,fps=35)
+    #imageio.mimsave('./' + str(a1_in_in_pokemon) + '_gif_fr/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif',images_in,fps=25)
+    #print('our new file is named using ' + str(file_name_list_in[0][:16]) + str(a1_in_in_pokemon) + '_gif_fr/' + 'output_' + str(a1_in_in_pokemon) + str(file_name_list_in[0][:16]) + '2.gif')
     return images_in
 
 # ========================================================================
@@ -83,7 +83,7 @@ p_list_all_grass = ['Leafeon', 'Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gl
 
 # p_list_all_grass = ['Leafeon', 'Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gloom', 'Vileplume', 'back/Leafeon', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume']
 
-p_list_all_grass = ['Leafeon']
+#p_list_all_grass = ['Leafeon']
 
 e_type_list = ['mareep', 'zapdos', 'emolga', 'joltik', 'back/mareep', 'back/zapdos', 'back/emolga', 'back/joltik']
 
@@ -220,12 +220,12 @@ for num_p_mon, p_mon_elem in enumerate(p_list_to_change):
 
     # this needs to change!!!  (len(a1[1]))/2 should be replaced with the length of the gif.... I guess Im just having trouble getting the correct length right now...
     r1=range(1, int( (len(a1[1]))/2.0 ) )
-    r1=range(1, int(frames_in_gif_num - 1) )
+    r1=range(1, int(frames_in_gif_num - 3) )
     # thats why i divide by 2 there... its just a random number that will likely be small enough to not exceed the indices
 
     frame_file_list=[]
     poke_id = a1_poke_id
-    os.system('mkdir ' + (str('poke_id') + str(poke_id)) + '_gif_frames')
+    os.system('mkdir ' + (str('poke_id') + str(poke_id)) + '_gif_fr')
 
     new_file_name=''
     images_anim = []
@@ -414,16 +414,16 @@ for num_p_mon, p_mon_elem in enumerate(p_list_to_change):
         # =====================================================================
 
         new_file_name='autumn_ivy_'+str(frame_elem)+'_makeover_'+str(a1_poke_id)+'.png'
-        plt.imsave( str('./' + (str('poke_id') + str(poke_id)) + '_gif_frames' + '/' + new_file_name), b2)
+        plt.imsave( str('./' + (str('poke_id') + str(poke_id)) + '_gif_fr' + '/' + new_file_name), b2)
         frame_file_list.append(new_file_name)
 
     images_anim2=images_anim
-    images_anim2 = fin_gif_out_even((str('poke_id') + str(poke_id)), str('./' + (str('poke_id') + str(poke_id)) + '_gif_frames' + '/'), frame_file_list, images_anim, 're_combo_anim')
+    images_anim2 = fin_gif_out_even((str('poke_id') + str(poke_id)), str('./' + (str('poke_id') + str(poke_id)) + '_gif_fr' + '/'), frame_file_list, images_anim, 're_combo_anim')
     # =========================================================================
     # =========================================================================
 
-    os.system( str('cp ' + str('./' + ('poke_id' + str(poke_id)) + '_gif_frames' + '/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')) + ' ' + './completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif')
-    os.system( str('cp ' + str('./' + ('poke_id' + str(poke_id)) + '_gif_frames' + '/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')) + ' ' + './completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif')
+    os.system( str('cp ' + str('./' + ('poke_id' + str(poke_id)) + '_gif_fr' + '/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')) + ' ' + './completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif')
+    os.system( str('cp ' + str('./' + ('poke_id' + str(poke_id)) + '_gif_fr' + '/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')) + ' ' + './completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif')
     os.system('gifsicle --flip-horizontal ' + 'completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif' + ' -o ' + 'completed_color_change_animations/' + str(poke_id) + 'flipped_FALL_type3.gif' )
 
 

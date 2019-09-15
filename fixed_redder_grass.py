@@ -220,10 +220,6 @@ for num_p_mon, p_mon_elem in enumerate(p_list_to_change):
 
     file_n_o.close()
 
-
-
-
-
     # this needs to change!!!  (len(a1[1]))/2 should be replaced with the length of the gif.... I guess Im just having trouble getting the correct length right now...
     r1=range(1, int( (len(a1[1]))/2.0 ) )
     r1=range(1, int(frames_in_gif_num - 2) )
@@ -432,9 +428,8 @@ for num_p_mon, p_mon_elem in enumerate(p_list_to_change):
     os.system( str('cp ' + str('./' + ('poke_id' + str(poke_id)) + '_gif_fr' + '/' + 'output_poke_id' + str(poke_id) + 're_combo_anim2.gif')) + ' ' + './completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif')
     os.system('gifsicle --flip-horizontal ' + 'completed_color_change_animations/' + str(poke_id) + '_FALL_type3.gif' + ' -o ' + 'completed_color_change_animations/' + str(poke_id) + 'flipped_FALL_type3.gif' )
 
-
-# transparent background creation:
-os.system('gifsicle -bII --transparent "#000000" completed_color_change_animations/*type3.gif')
+    # transparent background creation:
+    os.system('gifsicle -bII --transparent "#000000" completed_color_change_animations/' + str(renamed_file) + '*type3.gif')
 
 
 

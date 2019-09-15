@@ -46,6 +46,7 @@ import imageio
 os.system('rm -r poke_id_gif_fr')
 os.system('rm -r *saur_gif_fr/')
 os.system('rm -r poke_id*')
+os.system('rm -r *_gif_fr')
 
 # ===================================================================
 # now to turn created png into combined gif:
@@ -81,7 +82,7 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
 
 p_list_all_grass = ['Leafeon', 'Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gloom', 'Vileplume', 'Paras', 'Parasect', 'Bellsprout', 'Weepinbell', 'Victreebel', 'Exeggcute', 'Exeggutor', 'Tangela', 'Chikorita', 'Bayleef', 'Meganium', 'Bellossom', 'Hoppip', 'Skiploom', 'Jumpluff', 'Sunkern', 'Sunflora', 'Celebi', 'back/Leafeon', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume', 'back/Paras', 'back/Parasect', 'back/Bellsprout', 'back/Weepinbell', 'back/Victreebel', 'back/Exeggcute', 'back/Exeggutor', 'back/Tangela', 'back/Chikorita', 'back/Bayleef', 'back/Meganium', 'back/Bellossom', 'back/Hoppip', 'back/Skiploom', 'back/Jumpluff', 'back/Sunkern', 'back/Sunflora', 'back/Celebi']
 
-# p_list_all_grass = ['Leafeon', 'Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gloom', 'Vileplume', 'back/Leafeon', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume']
+p_list_all_grass = ['Leafeon', 'Bulbasaur', 'Ivysaur', 'Venusaur', 'Oddish', 'Gloom', 'Vileplume', 'back/Leafeon', 'back/Bulbasaur', 'back/Ivysaur', 'back/Venusaur', 'back/Oddish', 'back/Gloom', 'back/Vileplume']
 
 #p_list_all_grass = ['Leafeon']
 
@@ -168,7 +169,7 @@ for num_p_mon, p_mon_elem in enumerate(p_list_to_change):
     image_url = 'http://www.pokestadium.com/sprites/xy/'+str(a1_poke_id)+'.gif'
     s2 = poke_id
     if (s2.count('/') == 1):
-        a1_poke_id = str(a1_poke_id[( a1_poke_id.find('/') + 1 ):]) + 'Back'
+        a1_poke_id = 'Back' + str(a1_poke_id[( a1_poke_id.find('/') + 1 ):]).title()
         p_reply = a1_poke_id
         poke_id = str(p_reply)
 #>>> if (s2.count('/') == 1):
@@ -182,7 +183,12 @@ for num_p_mon, p_mon_elem in enumerate(p_list_to_change):
 
     # ====================================================
     im=a1
-    im = Image.open((str(p_mon_elem).lower()) + ".gif")
+
+    if(p_mon_elem.count('/') >= 1):
+        renamed_file = str(p_mon_elem).replace('/',' ').title().replace(' ','')
+    else:
+        renamed_file = str(p_mon_elem).lower()
+    im = Image.open( str(renamed_file) + ".gif")
 
     index = 1
     for frame in ImageSequence.Iterator(im):

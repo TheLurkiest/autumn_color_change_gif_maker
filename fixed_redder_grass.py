@@ -226,7 +226,7 @@ for num_p_mon, p_mon_elem in enumerate(p_list_to_change):
 
     # this needs to change!!!  (len(a1[1]))/2 should be replaced with the length of the gif.... I guess Im just having trouble getting the correct length right now...
     r1=range(1, int( (len(a1[1]))/2.0 ) )
-    r1=range(1, int(frames_in_gif_num - 3) )
+    r1=range(1, int(frames_in_gif_num - 2) )
     # thats why i divide by 2 there... its just a random number that will likely be small enough to not exceed the indices
 
     frame_file_list=[]

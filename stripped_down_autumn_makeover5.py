@@ -1,10 +1,10 @@
 # autumn venusaur makeover:
 
 # here is our newest gif url source--first front gif:
-# http://www.pokestadium.com/sprites/xy/cubone.gif
+# https://www.pkparaiso.com/imagenes/xy/sprites/animados/cubone.gif
 
 # ...then back gif:
-# http://www.pokestadium.com/sprites/xy/back/cubone.gif
+# https://www.pkparaiso.com/imagenes/xy/sprites/animados/back/cubone.gif
 
 # HOW TO USE:
 # just enter this terminal command to use this python code:
@@ -83,7 +83,7 @@ def fin_gif_out_even(a1_in_in_pokemon, png_dir_in, file_name_list_in, images_in,
 # source of grass types comes from here: https://sprites.pokecheck.org/i/272.gif
 
 # best source of gifs currently-- is NOW THIS INSTEAD:
-# http://www.pokestadium.com/sprites/xy/cubone.gif
+# https://www.pkparaiso.com/imagenes/xy/sprites/animados/cubone.gif
 
 # ...therefore default value is now name-- not number:
 a1_poke_id = 'venonat'
@@ -94,7 +94,7 @@ a1_poke_id = str(p_reply)
 a1_poke_id = input('enter pokemon name: ')
 import requests
 
-image_url = 'http://www.pokestadium.com/sprites/xy/'+str(a1_poke_id)+'.gif'
+image_url = 'https://www.pkparaiso.com/imagenes/xy/sprites/animados/'+str(a1_poke_id)+'.gif'
 
 img_data = requests.get(image_url).content
 with open(str(a1_poke_id)+'.gif', 'wb') as handler:
